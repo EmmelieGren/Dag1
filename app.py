@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, upgrade
-
+from random import randint
 from model import db, seedData, Customer
+
 
 app = Flask(__name__)
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:stefan@localhost/players0101'
@@ -13,8 +14,16 @@ migrate = Migrate(app,db)
 
 @app.route("/")
 def startpage():
-	    return "<h1>test</h1>"
-        # <html><head></head><</html>
+    dagen = "Måndag"
+    siffran = randint(1,6)
+    #html= render_template("index.html", dag = dagen, siffra = siffran, customer=Customer.query.all())
+    return render_template("index.html", dag = dagen, siffra = siffran, customers=Customer.query.all())
+
+
+@app.route("/customers")
+def customerspage():
+    return render_template("customers.html", customers= Customer.query.all())
+
 
 @app.route("/kontakt")
 def contactpage():
@@ -26,9 +35,9 @@ def contactpage():
 
 if __name__  == "__main__":
     with app.app_context():
-        upgrade()
+        #upgrade()
     
-        seedData(db)
+        #seedData(db)
         app.run()
         # while True:
         #     print("1. Create")
@@ -41,3 +50,4 @@ if __name__  == "__main__":
         #         print("Create")
         #     if action == "2":
         #         print("List")  
+

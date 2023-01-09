@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    Hej jag heter Snuffe
+    <p>Idag är det {{dag}}</p>
+    <p>Din tärning blev {{siffra}}</p>
+    <!--<img src="/static/images/igge.jpg"                Denna använder vi inte>-->
+    {% if siffra ==1 %}
+    <img src="{{ url_for('static', filename='images/igge.jpg') }}">
+    {% elif siffra ==2 %}
+    <img src="{{ url_for('static', filename='images/tvåIgge.jpg') }}">
+    {% elif siffra ==3 %}
+    <img src="{{ url_for('static', filename='images/treIgge.jpg') }}">
+    {% elif siffra ==4 %}
+    <img src="{{ url_for('static', filename='images/fyraIgge.jpg') }}">
+    {% elif siffra ==5 %}
+    <img src="{{ url_for('static', filename='images/femIgge.jpg') }}">
+    {% elif siffra ==6 %}
+    <img src="{{ url_for('static', filename='images/sexIgge.jpg') }}">
+
+    
+
+    {% endif %}
+    <table>
+        {% for c in customers %}
+            <tr>
+                <td>
+                    {{c.Name}}
+                </td>
+                <td>
+                    {{c.City}}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+
+</body>
+</html>
